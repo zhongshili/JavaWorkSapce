@@ -1,0 +1,58 @@
+package common.pojo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JsonMobileUserCart {
+
+	private String msg; // 响应信息
+	private boolean success; // 操作是否成功
+	private List commodityList = new ArrayList(0);// 广告轮播数据集
+	private List userCart = new ArrayList(0);// 广告轮播数据集
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	
+	public List getCommodityList() {
+		return commodityList;
+	}
+
+	public void setCommodityList(List commodityList) {
+		this.commodityList = commodityList;
+	}
+
+	public List getUserCart() {
+		return userCart;
+	}
+
+	public void setUserCart(List userCart) {
+		this.userCart = userCart;
+	}
+
+	
+	public JsonMobileUserCart(String msg, boolean success, List commodityList, List userCart) {
+		super();
+		this.msg = msg;
+		this.success = success;
+		this.commodityList = commodityList;
+		this.userCart = userCart;
+	}
+
+	public JsonMobileUserCart() {
+		super();
+	}
+}

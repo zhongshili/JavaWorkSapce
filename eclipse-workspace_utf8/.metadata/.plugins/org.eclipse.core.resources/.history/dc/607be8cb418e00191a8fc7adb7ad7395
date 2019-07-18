@@ -1,0 +1,13 @@
+package commodity.service;
+
+import common.pojo.Commodity;
+import common.pojo.JsonMsg;
+import common.pojo.JsonRs;
+
+public interface CommodityService {
+  public JsonRs selectByPage(Commodity commodity);//查询业务
+  public JsonMsg insert(Commodity commodity);//添加业务
+  public JsonMsg delete(Commodity commodity);//删除业务
+  public JsonMsg update(Commodity commodity);//修改业务
+  public Commodity findOrderInfoById(int id);
+}

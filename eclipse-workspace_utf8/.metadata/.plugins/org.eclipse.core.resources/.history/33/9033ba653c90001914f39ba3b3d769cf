@@ -1,0 +1,5 @@
+package common.pojo;
+
+public class CommodityType {
+
+}

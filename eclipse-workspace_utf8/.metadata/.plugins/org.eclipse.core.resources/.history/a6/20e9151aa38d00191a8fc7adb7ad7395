@@ -1,0 +1,16 @@
+package common.pojo;
+
+public class Commodity {
+	int productId;
+	float productPrice;
+	String productTitle;
+	String productCarriage;
+	String productAddressRigger;
+	int productSendCredit;
+	String productShopName;
+	String productShopUrl;
+	int inventory;
+	int productType
+	
+	
+}

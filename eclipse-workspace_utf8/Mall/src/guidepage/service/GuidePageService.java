@@ -1,0 +1,13 @@
+package guidepage.service;
+
+import common.pojo.GuidePage;
+import common.pojo.JsonMsg;
+import common.pojo.JsonRs;
+
+public interface GuidePageService {
+  public JsonRs selectByPage(GuidePage guide);//查询业务
+  public JsonMsg insert(GuidePage guide);//添加业务
+  public JsonMsg delete(GuidePage guide);//删除业务
+  public JsonMsg update(GuidePage guide);//修改业务
+  public GuidePage findOrderInfoById(String id);
+}

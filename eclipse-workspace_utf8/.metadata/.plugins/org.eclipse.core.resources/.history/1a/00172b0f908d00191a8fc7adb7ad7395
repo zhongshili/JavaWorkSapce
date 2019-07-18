@@ -1,0 +1,45 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div id="dialog_user" class="easyui-dialog" data-options="title:'编辑广告页数据',buttons:'#btn_user',closed:true" style="width:430px;height:330px;padding:20px 30px;">
+	<div>
+		<input name="id" id="id" type="hidden">
+	</div>  
+	<div>
+    <label>用户名：</label>
+      <input name="userName" id="userName" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>姓名：</label>
+    <input name="name" id="name" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>性别：</label>
+    <input name="sex" id="sex" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>年龄：</label>
+    <input name="age" id="age" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>电话号码：</label>
+    <input name="phone" id="phone" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>收货地址：</label>
+    <input name="address" id="address" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    
+    <div id="container">
+    <label>背景图片：</label>
+    <!-- 显示文件名的文本框 -->
+    <input id="userImg" class="easyui-textbox" style="width:220px;" readonly="readonly">
+    <!-- 处理图片的url -->
+    <input name="userImg" id="userImg" type="hidden">
+    <button type="button" id="pickfiles" style="font-size:12px;display: inline">选择文件</button>
+    </div>
+  </div>
+</div>
+<!-- 对话框按钮 -->
+<div id="btn_user">
+  <a id="a_save" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveRecord()">保存</a>
+  <a class="easyui-linkbutton" data-options="iconCls:'icon-no'" onclick="javascript:$('#dialog_user').dialog('close')">退出</a>
+</div>

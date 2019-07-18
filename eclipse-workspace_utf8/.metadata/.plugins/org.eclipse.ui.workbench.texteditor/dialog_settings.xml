@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="userCart" key="selection"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="user"/>
+			<item value="User"/>
+			<item value="newUser"/>
+			<item value="UserCart"/>
+			<item value="userCart"/>
+			<item value="advert"/>
+			<item value="Advert"/>
+			<item value="promotion"/>
+			<item value="Promotion"/>
+			<item value="home/"/>
+			<item value="newC"/>
+			<item value="action/"/>
+			<item value="/home"/>
+			<item value="guide"/>
+			<item value="guidepage"/>
+		</list>
+		<list key="replacehistory">
+			<item value="userCart"/>
+			<item value="UserCart"/>
+			<item value="newUserCart"/>
+			<item value="User"/>
+			<item value="user"/>
+			<item value="imgUrl"/>
+			<item value="Commodity"/>
+			<item value="commodity"/>
+			<item value=""/>
+			<item value="c"/>
+			<item value="n"/>
+			<item value="shoppingusers"/>
+			<item value="Withyou"/>
+			<item value="Mall"/>
+			<item value="position"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="300" key="DIALOG_WIDTH"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+		<item value="409" key="DIALOG_HEIGHT"/>
+		<item value="681" key="DIALOG_X_ORIGIN"/>
+		<item value="111" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

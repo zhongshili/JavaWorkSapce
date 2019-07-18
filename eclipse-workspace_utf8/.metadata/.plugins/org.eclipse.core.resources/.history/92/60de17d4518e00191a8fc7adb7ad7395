@@ -1,0 +1,95 @@
+package common.pojo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JsonMobileUserCart {
+
+	private String msg; // 响应信息
+	private boolean success; // 操作是否成功
+	private List headAdverts = new ArrayList(0);// 广告轮播数据集
+	private List firstAdverts = new ArrayList(0);// 广告轮播数据集
+	private List secondAdverts = new ArrayList(0);// 广告轮播数据集
+	private List seckills = new ArrayList(0);// 广告轮播数据集
+	private List firstPromotions = new ArrayList(0);// 广告轮播数据集
+	private List secondPromotions = new ArrayList(0);// 广告轮播数据集
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public List getHeadAdverts() {
+		return headAdverts;
+	}
+
+	public void setHeadAdverts(List headAdverts) {
+		this.headAdverts = headAdverts;
+	}
+
+	public List getFirstAdverts() {
+		return firstAdverts;
+	}
+
+	public void setFirstAdverts(List firstAdverts) {
+		this.firstAdverts = firstAdverts;
+	}
+
+	public List getSecondAdverts() {
+		return secondAdverts;
+	}
+
+	public void setSecondAdverts(List secondAdverts) {
+		this.secondAdverts = secondAdverts;
+	}
+
+	public List getSeckills() {
+		return seckills;
+	}
+
+	public void setSeckills(List seckills) {
+		this.seckills = seckills;
+	}
+
+	public List getFirstPromotions() {
+		return firstPromotions;
+	}
+
+	public void setFirstPromotions(List firstPromotions) {
+		this.firstPromotions = firstPromotions;
+	}
+
+	public List getSecondPromotions() {
+		return secondPromotions;
+	}
+
+	public void setSecondPromotions(List secondPromotions) {
+		this.secondPromotions = secondPromotions;
+	}
+	
+	public JsonMobileUserCart(String msg, boolean success, List headAdverts, List firstAdverts, List secondAdverts, List seckills, List firstPromotions, List secondPromotions) {
+		this.msg = msg;
+		this.success = success;
+		this.headAdverts.addAll(headAdverts);
+		this.firstAdverts.addAll(firstAdverts);
+		this.secondAdverts.addAll(secondAdverts);
+		this.seckills.addAll(seckills);
+		this.firstPromotions.addAll(firstPromotions);
+		this.secondPromotions.addAll(secondPromotions);
+	}
+
+	public JsonMobileUserCart() {
+		super();
+	}
+}

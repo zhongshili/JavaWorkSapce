@@ -1,0 +1,63 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div id="dialog_commodity" class="easyui-dialog" data-options="title:'编辑引导页数据',buttons:'#btn_guide',closed:true" style="width:430px;height:330px;padding:20px 30px;">
+      <th data-options="field:'productAddressRigger',width:100,align:'center'">发货地址</th>
+      <th data-options="field:'productSendCredit',width:100,align:'center'">赠送积分</th>
+      <th data-options="field:'productShopName',width:200,align:'center'">店铺名</th>
+      <th data-options="field:'productShopUrl',width:100,align:'center'">店铺地址</th>
+      <th data-options="field:'inventory',width:100,align:'center'">库存</th>
+      <th data-options="field:'productTypeId',width:100,align:'center'">产品类型ID</th>
+      <th data-options="field:'productImg',width:350,align:'center'">图片地址</th>
+	<div>
+		<input name="productId" id="productId" type="hidden">
+	</div>  
+	<div>
+    <label>标　　题：</label>
+      <input name="productPrice" id="productPrice" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>左侧广告：</label>
+    <input name="productTitle" id="productTitle" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productCarriage" id="productCarriage" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productAddressRigger" id="productAddressRigger" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productSendCredit" id="productSendCredit" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productShopName" id="productShopName" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productShopUrl" id="productShopUrl" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="inventory" id="inventory" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>右侧广告：</label>
+    <input name="productTypeId" id="productTypeId" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div id="container">
+    <label>背景图片：</label>
+    <!-- 显示文件名的文本框 -->
+    <input id="imgName" class="easyui-textbox" style="width:220px;" readonly="readonly">
+    <!-- 处理图片的url -->
+    <input name="imgUrl" id="imgUrl" type="hidden">
+    <button type="button" id="pickfiles" style="font-size:12px;display: inline">选择文件</button>
+    </div>
+  </div>
+</div>
+<!-- 对话框按钮 -->
+<div id="btn_guide">
+  <a id="a_save" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveRecord()">保存</a>
+  <a class="easyui-linkbutton" data-options="iconCls:'icon-no'" onclick="javascript:$('#dialog_guide').dialog('close')">退出</a>
+</div>

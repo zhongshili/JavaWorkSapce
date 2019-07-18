@@ -1,0 +1,77 @@
+1560350405023	Delete element
+1560350427837	Copy package
+1560350463854	Delete element
+1560350559315	Rename package 'user.action.copy'
+1560350574111	Rename package 'user.dao.copy'
+1560350585664	Rename package 'user.service.copy'
+1560352208808	Rename type 'GuidePageService'
+1560352225367	Rename type 'GuidePageServiceImpl'
+1560352459969	Rename type 'GuidePageDAO'
+1560352479119	Rename type 'GuidePageDAOImpl'
+1560386375691	Copy file
+1560386409534	Copy folder
+1560386486567	Rename resource 'advert_dialog.inc'
+1560386499088	Rename resource 'advert_field.inc'
+1560386539413	Copy file
+1560407860832	Copy package
+1560407872384	Delete element
+1560407909919	Copy package
+1560407933477	Copy package
+1560407939503	Copy package
+1560407947625	Delete element
+1560407955560	Delete element
+1560407995485	Delete element
+1560408042083	Delete element
+1560408107416	Copy packages
+1560408118995	Delete element
+1560408124542	Delete element
+1560408129408	Delete element
+1560408179257	Copy packages
+1560408368000	Rename type 'UserService'
+1560408387360	Rename type 'UserServiceImpl'
+1560408732006	Rename type 'UserDAO'
+1560408767032	Rename type 'UserDAOImpl'
+1560412815623	Copy file
+1560412871242	Copy folder
+1560412889061	Rename resource 'guide_dialog.inc'
+1560412903112	Rename resource 'guide_field.inc'
+1560412960661	Copy file
+1560435137166	Copy package
+1560435148834	Delete element
+1560435187866	Copy packages
+1560435213322	Delete element
+1560436447637	Copy compilation unit
+1560472443123	Copy compilation unit
+1560472687687	Copy packages
+1560472879496	Rename type 'MobileService'
+1560472937963	Rename type 'MobileServiceCommodity'
+1560472981379	Copy compilation unit
+1560474082088	Copy compilation unit
+1560475037384	Copy compilation unit
+1560478301630	Copy compilation unit
+1560478509213	Copy compilation unit
+1560478935771	Rename package 'UserCart'
+1560478954204	Copy package
+1560478966781	Delete element
+1560478986141	Copy package
+1560478996430	Delete element
+1560479023481	Copy package
+1560479029603	Delete element
+1560479080020	Copy package
+1560479097143	Delete element
+1560479164337	Delete element
+1560479235969	Copy package
+1560479260287	Copy package
+1560479293994	Copy package
+1560479314087	Copy package
+1560479322666	Delete element
+1560479331672	Delete element
+1560479354719	Copy package
+1560479373243	Copy package
+1560479383293	Delete element
+1560479390333	Delete element
+1560479476385	Rename type 'UserService'
+1560479509098	Rename type 'UserServiceImpl'
+1560480007344	Rename type 'UserDAO'
+1560480023371	Rename type 'UserDAOImpl'
+1560481501203	Copy compilation unit

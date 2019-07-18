@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="SpringProject01">
+<aspect-definition advice-class-name="org.springframework.transaction.interceptor.TransactionInterceptor" advice-method-name="invoke" advice-method-parameter-types="org.aopalliance.intercept.MethodInvocation" advice-type="AROUND" aspect-end-line-number="34" aspect-name="org.springframework.transaction.interceptor.TransactionInterceptor#SpringProject01#src/applicationContext.xml#34" aspect-start-line-number="34" factory-id="org.springframework.ide.eclipse.aop.core.javaAdvisorDefinitionElementFactory" file="/SpringProject01/src/applicationContext.xml" pointcut-expression="(@within(org.springframework.transaction.annotation.Transactional) || @annotation(org.springframework.transaction.annotation.Transactional)) &amp;&amp; execution(* *..*(..))" proxy-target-class="false">
+<aop-reference advice-type="AROUND" bean="1:BeansModel|2:SpringProject01|3:src/applicationContext.xml|7:beans:11|8:studentService:144" bean-file="/SpringProject01/src/applicationContext.xml" bean-start-line="144" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/SpringProject01/src/applicationContext.xml" source="=SpringProject01/src\/spring-tx-4.3.9.RELEASE.jar&lt;org.springframework.transaction.interceptor(TransactionInterceptor.class[TransactionInterceptor~invoke~Lorg.aopalliance.intercept.MethodInvocation;" source-start-line="-1" target="=SpringProject01/src&lt;zhong.JJS.service{StudentServiceImpl.java[StudentServiceImpl~addStudent~QStudent;" target-start-line="21"/>
+</aspect-definition>
+</aop-project>
+</aop-reference-model>

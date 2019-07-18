@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:03:25 +0800] "GET /Mall/easyui/themes/bootstrap/images/messager_icons.png HTTP/1.1" 200 6116
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:03:29 +0800] "POST /Mall/guidePage/delete HTTP/1.1" 200 37
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:03:29 +0800] "POST /Mall/guidePage/get HTTP/1.1" 200 557
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:04:04 +0800] "POST /Mall/token/get HTTP/1.1" 200 179
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:04:05 +0800] "POST /Mall/guidePage/add HTTP/1.1" 200 37
+0:0:0:0:0:0:0:1 - - [25/May/2019:00:04:05 +0800] "POST /Mall/guidePage/get HTTP/1.1" 200 678

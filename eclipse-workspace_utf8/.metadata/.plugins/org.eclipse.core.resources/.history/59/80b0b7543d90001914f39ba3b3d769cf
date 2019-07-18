@@ -1,0 +1,13 @@
+package commodityType.dao;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.pojo.CommodityType;
+
+public interface CommodityTypeDAO {
+  public ArrayList<CommodityType> select(CommodityType commodityType) throws SQLException, ClassNotFoundException;//查询
+  public boolean insert(CommodityType commodityType) throws SQLException;//添加
+  public boolean delete(CommodityType commodityType) throws SQLException;//删除
+  public boolean update(CommodityType commodityType) throws SQLException;//修改
+  public CommodityType findOrderInfoById(CommodityType commodityType) throws SQLException;//查询单条 数据
+}

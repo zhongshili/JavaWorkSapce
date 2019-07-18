@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Wall.java&apos; to &apos;TankWarV1.2抽取父类/src/com.JJS.A1612.domain&apos;&#x0D;&#x0A;- Original project: &apos;TankWarV1.2抽取父类&apos;&#x0D;&#x0A;- Destination element: &apos;TankWarV1.2抽取父类/src/com.JJS.A1612.domain&apos;&#x0D;&#x0A;- Original element: &apos;com.JJS.A1612.domain.Wall.java&apos;" description="Copy compilation unit" destination="/src&lt;com.JJS.A1612.domain" element1="/src&lt;com.JJS.A1612.domain{Wall.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1552626333254" units="1" version="1.0"/>
+</session>

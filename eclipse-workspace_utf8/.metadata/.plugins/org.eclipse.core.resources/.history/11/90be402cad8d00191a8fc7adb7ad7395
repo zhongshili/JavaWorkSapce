@@ -1,0 +1,132 @@
+package commodity.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.pojo.Commodity;
+
+public class CommodityDAOImpl implements CommodityDAO {
+
+	private Connection conn = null;
+	private PreparedStatement pst = null;
+
+	// 定义构造方法，实例化的时候完成连接的注入
+	public CommodityDAOImpl(Connection conn) {
+		super();
+		this.conn = conn;
+	}
+
+	// 查询记录
+	public ArrayList<Commodity> select(Commodity commodity) throws SQLException {
+		// 获取Commodity表中全部数据，并以字段page升序排序
+		String sql = "select * from commodity where 1=1";
+		String condition = commodity.getCondition();
+		String limit = commodity.getLimit();
+		if (condition != null && !condition.equals("")) {
+//			相当于模糊匹配，查找每个中的关键字
+			String cond1 = "commodityname like '%" + condition + "%'";
+			String cond2 = "name like '%" + condition + "%'";
+			sql = "select * from Commodity where " + cond1 + " or " + cond2;
+		}
+		if (limit != null && !limit.equals("")) {
+			sql += limit;
+		}
+		pst = conn.prepareStatement(sql);
+		ResultSet rs = pst.executeQuery();
+		ArrayList<Commodity> commodityList = new ArrayList<Commodity>();
+		if (rs.next()) {
+			for (int i = 0; i <= rs.getRow(); i++) {
+				Commodity newCommodity = new Commodity();
+				newCommodity.setProductId(rs.getInt("productid"));
+				newCommodity.setProductPrice(rs.getFloat("productprice"));
+				newCommodity.setProductTitle(rs.getString("producttitle"));
+				newCommodity.setProductCarriage(rs.getString("productcarriage"));
+				newCommodity.setProductAddressRigger(rs.getString("productaddressrigger"));
+				newCommodity.setProductSendCredit(rs.getInt("productsendcredit"));
+				newCommodity.setProductShopName(rs.getString("productshopname"));
+				newCommodity.setProductShopUrl(rs.getString("productshopurl"));
+				newCommodity.setProductImg(rs.getString("productimg"));
+				newCommodity.setInventory(rs.getInt("inventory"));
+				newCommodity.setProductTypeId(rs.getInt("producttypeid"));
+				
+				commodityList.add(newCommodity);
+				rs.next();
+			}
+		}
+		return commodityList;
+	}
+
+	// 插入记录
+	public boolean insert(Commodity commodity) throws SQLException {
+		try {
+			String sql = "insert into commodity(commodityname,name,password,sex,age,phone,address,commodityImg) values(?,?,?,?,?,?,?,?) ";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, commodity.getCommodityName());
+			pst.setString(2, commodity.getName());
+			pst.setString(3, commodity.getPassword());
+			pst.setString(4, commodity.getSex());
+			pst.setInt(5, commodity.getAge());
+			pst.setString(6, commodity.getPhone());
+			pst.setString(7, commodity.getAddress());
+			pst.setString(8, commodity.getCommodityImg());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// 更新记录
+	public boolean update(Commodity commodity) throws SQLException {
+		try {
+			String sql = "update commodity set commodityname=?,name=?,password=?,sex=?,age=?,phone=?,address=?,commodityImg=? where commodityname=?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, commodity.getCommodityName());
+			pst.setString(2, commodity.getName());
+			pst.setString(3, commodity.getPassword());
+			pst.setString(4, commodity.getSex());
+			pst.setInt(5, commodity.getAge());
+			pst.setString(5, commodity.getPhone());
+			pst.setString(6, commodity.getAddress());
+			pst.setString(6, commodity.getCommodityImg());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// 删除记录
+	public boolean delete(Commodity commodity) throws SQLException {
+		try {
+			String sql = "delete from commodity where commodityName=?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, commodity.getCommodityName());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public Commodity findOrderInfoById(String commodityName) throws SQLException {
+		String sql = "select * from commodity where commodityName=?";
+		pst = conn.prepareStatement(sql);
+		pst.setString(1, commodityName);
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		Commodity commodity = new Commodity();
+		commodity.setAddress(rs.getString("address"));
+		commodity.setAge(rs.getInt("age"));
+		commodity.setName(rs.getString("name"));
+		commodity.setPassword(rs.getString("password"));
+		commodity.setCommodityName(rs.getString("commodityName"));
+		commodity.setCommodityImg(rs.getString("commodityImg"));
+		commodity.setPhone(rs.getString("phone"));
+		commodity.setSex(rs.getString("sex"));
+		return commodity;
+	}
+}

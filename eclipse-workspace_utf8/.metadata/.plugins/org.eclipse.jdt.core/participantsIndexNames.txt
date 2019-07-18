@@ -1,0 +1,9 @@
+INDEX VERSION 1.131
+D:\eclipse-workspace_utf8\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3568137328.index
+\MallJk2\src
+D:\eclipse-workspace_utf8\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2187977494.index
+\MallWeb\src
+D:\eclipse-workspace_utf8\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1163661602.index
+\Withyou\src
+D:\eclipse-workspace_utf8\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3886050502.index
+\Mall\src

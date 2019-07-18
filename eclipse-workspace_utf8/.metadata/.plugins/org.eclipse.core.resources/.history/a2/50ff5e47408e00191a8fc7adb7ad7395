@@ -1,0 +1,71 @@
+package commodity.mobile.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import commodity.dao.CommodityDAOImpl;
+import common.pojo.User;
+import common.pojo.Commodity;
+import common.pojo.JsonMobile;
+import common.pojo.JsonMobileCommodity;
+import common.pojo.JsonMobileUser;
+import common.util.DButil;
+
+public class MobileService {
+
+	/* 查询业务 */
+	public JsonMobileCommodity selectOne(Commodity commodity) {
+		Connection conn = DButil.getConnection();
+		CommodityDAOImpl commodityDAO = new CommodityDAOImpl(conn);
+		try {
+			// 1. 分别取出广告表和推荐的数据集
+			Commodity newCommodity = new Commodity();
+			newCommodity.setCondition("");
+			newCommodity = commodityDAO.findOrderInfoById(commodity);// 返回用户信息
+			conn.commit();
+
+			return new JsonMobileCommodity("查询成功", true, newCommodity);
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return new JsonMobileCommodity("查询失败", false, null);
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+	
+	
+	/* 查询业务 */
+	public JsonMobile selectAll(String productTitle) {
+		Connection conn = DButil.getConnection();
+		CommodityDAOImpl commodityDAO = new CommodityDAOImpl(conn);
+		try {
+			// 1. 分别取出广告表和推荐的数据集
+			ArrayList<Commodity> commodityList = new ArrayList<Commodity>();
+			Commodity commodity = new Commodity();
+			commodity.setCondition("");
+			commodityList = commodityDAO.select(commodity);// 返回广告表数据集
+			conn.commit();
+			return new JsonMobile("查询成功", true,commodityList);
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return new JsonMobile("查询失败", false, null,null,null,null,null,null);
+		} finally {
+			if (conn != null) {
+				DButil.closeConnection(conn);
+			}
+		}
+	}
+	
+	
+}

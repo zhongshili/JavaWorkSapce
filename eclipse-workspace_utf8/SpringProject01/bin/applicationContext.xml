@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 配置扫描器,它会去扫描下面标注的包的所有类，找到这些类是否有注解，有则即纳入文件。可以加多个包，加逗号就可以 -->
+	<context:component-scan base-package="zhong.JJS.DAO"></context:component-scan>
+	
+	<!-- 配置数据库相关-事务 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin@127.0.0.1:1521:ORCL"></property>
+		<property name="username" value="Edwin"></property>
+		<!-- 最大活动时间 -->
+		<property name="maxActive" value="10"></property>
+		<!-- 最低的空闲时间 -->
+		<property name="maxIdle" value="6"></property>
+	</bean>
+	
+	<!-- 配置事务管理器txManager(这是一个普通的类，jdbc的jar包里已经包含了),spring提供的DataSourceTransactionManager，并且需要关联源代码-->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	<!-- 增加对事务的支持 -->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
+	
+	
+	
+<!-- 该文件中产生的所有对象,被spring放入了一个称之为spring ioc容器的地方  -->
+	<!-- spring ioc容器帮我们做了两件事，1.创建对象，2.给属性复制，我们用的时候只需要拿就可以了 -->
+	<!-- id:唯一标识符，class指定类型 -->
+	<bean id="student" class="zhong.JJS.A1612.Student">
+		<!-- property:该class所代表类的属性值
+			name：属性名
+			value:属性值
+		 -->
+		<property name="stuNo" value="2"></property>
+		<property name="stuName" value="ls"></property>
+		<property name="age" value="24"></property>
+	</bean>
+<!-- 创建java课程类 -->
+	<bean id="javaCourse" class="zhong.JJS.A1612.JavaCourse">
+	</bean>
+<!-- 创建html课程类 -->
+	<bean id="htmlCourse" class="zhong.JJS.A1612.HtmlCourse">	
+	</bean>
+
+<!-- 创建Teacher、Course,用于解释依赖注入 ，set方法注入-->
+	<bean id="teacher" class="zhong.JJS.A1612.entity.Teacher">
+		<!-- 相当于set方法的调用，它会自动去调用set方法，可以去teacher类的set方法中测试 -->
+		<property name="name" value="张三"></property>
+		<property name="age" value="23"></property>
+	</bean>
+	<bean id="course" class="zhong.JJS.A1612.entity.Course">
+		<property name="courseName" value="java"></property>
+		<property name="courseHour" value="20"></property>
+		<!-- 对象不能用value，依赖注入 -->
+		<property name="teacher" ref="teacher"></property>
+	</bean>
+
+<!-- 创建Teacher、Course,用于解释依赖注入 ，构造方法注入, 和构造方法默认参数顺序赋值，也可以通过index指定 -->
+<!-- 也可以通名字指定，如age，或者用类型 -->
+	<bean id="teacher1" class="zhong.JJS.A1612.entity.Teacher">
+		<constructor-arg value="25" index="1"></constructor-arg>
+		<constructor-arg value="钟世立" index="0"></constructor-arg>
+	</bean>
+	<bean id="course1" class="zhong.JJS.A1612.entity.Course">
+		<constructor-arg value="24"></constructor-arg>
+		<constructor-arg value="zs"></constructor-arg>
+		<constructor-arg ref="teacher1"></constructor-arg>
+	</bean>
+
+<!-- 创建Teacher、Course,用于解释依赖注入 ，通过p命名空间 -->
+	<bean id="teacher2" class="zhong.JJS.A1612.entity.Teacher" p:age="25" p:name="王五">
+	</bean>
+	<bean id="course2" class="zhong.JJS.A1612.entity.Course" p:courseHour="25" p:courseName="赵四" p:teacher-ref="teacher2">
+	</bean>
+	
+<!-- 添加各种集合元素 -->
+	<bean id="collectionDemo" class="zhong.JJS.A1612.entity.AllCollection">
+		<!-- 通过set的方式赋值 -->
+		<property name="listElement">
+			<list>
+				<value>足球</value>
+				<value>篮球</value>
+				<value>乒乓球</value>
+			</list>
+		</property>
+		<property name="arrayElement">
+			<array>
+				<value>足球1</value>
+				<value>篮球1</value>
+				<value>乒乓球1</value>
+			</array>
+		</property>
+		<property name="setElement">
+			<set>
+				<value>足球2</value>
+				<value>篮球2</value>
+				<value>乒乓球2</value>
+			</set>
+		</property>
+		<property name="mapElement">
+			<map>
+				<entry>
+					<key><value>foot2</value></key>
+					<value>足球2</value>
+				</entry>
+				<entry>
+					<!-- key元素里面的值必须要用value标签来赋值 -->
+					<key><value>basketball2</value></key>
+					<value>篮球2</value>
+				</entry>
+			</map>
+		
+		</property>
+		<property name="properElement">
+			<props>
+				<prop key="foot3">足球</prop>
+				<prop key="basketball3">篮球</prop>
+			</props>
+		
+		</property>
+	</bean>
+	
+		
+	
+	
+	<bean id="studentDao" class="zhong.JJS.DAO.impl.StudentDaoImpl">
+	</bean>
+	<!-- 配置前置通知 -->
+	
+	<!-- addStudent()所在方法，要让spring知道类，即声明 -->
+	<bean id="studentService" class="zhong.JJS.service.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	
+
+	
+	
+	<!-- 前置通知的类 -->
+	<!-- 连接线的一方 -->
+	<bean id="logBefore" class="zhong.JJS.aop.LogBefore">
+	</bean>
+	
+	<!-- 将addStudet()和LogBefore“通知”类相关联 -->
+	<aop:config>
+		<!-- 切入点，在哪个点执行 -->
+		<!-- 连接线的另一方 -->
+		<aop:pointcut expression="execution(public void zhong.JJS.service.StudentServiceImpl.addStudent(zhong.JJS.A1612.Student))" id="pointcut"/>
+		<!-- advisor:相当于链接切入点和切面的线 -->
+		<!-- 连接线 -->
+		<aop:advisor advice-ref="logBefore" pointcut-ref="pointcut"/>
+	</aop:config>
+</beans>

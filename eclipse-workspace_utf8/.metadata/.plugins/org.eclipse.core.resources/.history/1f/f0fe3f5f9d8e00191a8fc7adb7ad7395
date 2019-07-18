@@ -1,0 +1,252 @@
+/**
+ * 实现基本增删改查相关脚本
+ */
+var url = null;// 请求远程数据的地址
+var condition = null;// 文本框的值，作为查询条件使用
+var imgName = null; // 图片文本框的值，判断图片有没有更新
+
+// 页面加载时查询
+$(document).ready(function() {
+	$("#btn_Query").click();
+});
+
+// 单击查询按钮
+$("#btn_Query").click(function() {
+	url = "/Mall/commodity/get";
+	var title = $("#title").val();
+	if (title != null && title != "") {
+		condition = title;
+	} else {
+		condition = null;
+	}
+	searchRecord();
+});
+
+// 查询记录
+// queryParams：在请求远程数据时发送额外的参数 格式：queryParams:{key1:value1,key2:value2}
+function searchRecord() {
+	$('#dg_commodity').datagrid({
+		url : url,
+		queryParams : {
+			"condition" : condition
+		},
+		success : function(data) {
+			$("#dg_commodity").datagrid("loadData", data.rows);
+		}
+	});
+};
+
+// 单击添加按钮
+$("#btn_Add").click(function() {
+	url = "/Mall/commodity/add";
+	$("#dialog_commodity").dialog("open");
+	$("#productId").val("");
+	$("#productPrice").textbox('setValue', "");
+	$("#productTitle").textbox('setValue', "");
+	$("#productCarriage").textbox('setValue', "");
+	$("#productAddressRigger").textbox('setValue', "");
+	$("#productSendCredit").textbox('setValue', "");
+	$("#productShopName").textbox('setValue', "");
+	$("#productShopUrl").textbox('setValue', "");
+	$("#inventory").textbox('setValue', "");
+	$("#imgName").textbox('setValue', "");
+	$("#productImg").val('');
+});
+
+// 单击修改按钮
+$("#btn_Edit").click(function() {
+	url = "/Mall/commodity/update"
+	var row = $("#dg_commodity").datagrid("getSelected");
+	if (row == null) {
+		showMessage("提示", "请选择需要修改的记录", 2000);
+		return;
+	}
+	$("#dialog_commodity").dialog("open");
+	$("#productId").val(row.productId);
+	$("#productPrice").textbox('setValue', row.productPrice);
+	$("#productTitle").textbox('setValue', row.productTitle);
+	$("#productTypeId").textbox('setValue', row.productTypeId);
+	$("#imgName").textbox('setValue', row.productImg);
+	$("#productImg").val(row.productImg);
+	imgName = row.imgName;
+});
+
+// 单击删除按钮
+$("#btn_Del").click(function() {
+	url = "/Mall/commodity/delete"
+	var row = $("#dg_commodity").datagrid("getSelected");
+	if (row == null) {
+		showMessage("提示", "请选择要删除的记录", 2000);
+		return;
+	}
+	var productId = row.productId;
+	var imgName = row.imgName;
+	$.messager.confirm('提示', '确认要删除吗?', function(data) {
+		if (data) {
+			$.post(url, {
+				productId : productId,
+				imgName : imgName
+			}, function(data) {
+				if (data.success) {
+					$("#dialog_commodity").dialog("close");
+					$("#dg_commodity").datagrid("reload");
+					showMessage("提示", data.msg, 2000);
+				}
+			});
+		}
+	});
+});
+
+// 单击保存按钮
+function saveRecord() {
+	// 在这里对文本框做一些验证
+
+	if ($("#imgName").textbox("getValue")) {
+		// 如果没有重新选择图片，就直接修改文本数据，否则先上传图片再修改数据
+		if ($("#imgName").textbox("getValue") == imgName) {
+			saveData()
+		} else {
+			uploader.start(); // 单击保存按钮后先上传图片，然后添加/修改数据到服务器
+		}
+	} else {
+		saveData();
+	}
+}
+
+function saveData() {
+	var productId = $("#productId").val();
+	var productPrice = $("#productPrice").textbox("getValue");
+	var productTitle = $("#productTitle").textbox("getValue");
+	var productTypeId = $("#productTypeId").textbox("getValue");
+	var productCarriage = $("#productCarriage").textbox("getValue");
+	var productAddressRigger = $("#productAddressRigger").textbox("getValue");
+	var productSendCredit = $("#productSendCredit").textbox("getValue");
+	var productShopName = $("#productShopName").textbox("getValue");
+	var productShopUrl = $("#productShopUrl").textbox("getValue");
+	var inventory = $("#inventory").textbox("getValue");
+	var productImg = $("#productImg").val();
+	console.log(productSendCredit);
+	alert(productSendCredit);
+	$.post(url, {
+		"productId" : productId,
+		"productPrice" : productPrice,
+		"productTitle" : productTitle,
+		"productTypeId" : productTypeId,
+		"productCarriage" : productCarriage,
+		"productAddressRigger" : productAddressRigger,
+		"productSendCredit" : productSendCredit,
+		"productShopName" : productShopName,
+		"productShopUrl" : productShopUrl,
+		"inventory" : inventory,
+		"productImg" : productImg
+	}, function(data) {
+		if (data.success) {
+			$("#dialog_commodity").dialog("close");
+			$("#dg_commodity").datagrid("reload");
+			showMessage("提示", data.msg, 2000);
+		}
+	});
+}
+
+// 退出登录
+$(document).ready(function() {
+	$("#a_exit").click(function() {
+		window.location.href = "/MaterialWebsite/userAction/Exit";
+	});
+});
+
+var token = null;// 保存token
+var key = null;// 保存上传的文件名
+var timestamp = null;// 时间戳，用于重命名key
+// 配置七牛上传和plupload
+var uploader = Qiniu.uploader({
+	disable_statistics_report : false, // 禁止自动发送上传统计信息到七牛，默认允许发送
+	runtimes : 'html5,flash,html4', // 上传模式，依次退化
+	browse_button : 'pickfiles', // 上传选择文件的点选按钮，必需
+	container : 'container', // 上传区域DOM的ID，默认是browser_button的父元素
+	max_file_size : '10mb', // 最大文件体积限制
+	flash_swf_url : '/Plupload/js/Moxie.swf', // 引入flash，相对路径
+	dragdrop : false, // 关闭可拖曳上传
+	chunk_size : '4mb', // 分块上传时，每块的体积
+	domain : 'http://prl2nz0et.bkt.clouddn.com/', // bucket域名，下载资源时用到，必需
+	auto_start : false, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	max_retries : 3, // 上传失败最大重试次数
+	save_key : false, // 为false则以上传文件的原名命名，否则随机命名，这里推荐false
+	get_new_uptoken : true,// 设置上传文件的时候是否每次都重新获取新的token
+	unique_names : false, // 自动生成文件名,如果值为false则保留原文件名上传
+	scope : {
+		bucket : key
+	},
+	// 在初始化时，uptoken，uptoken_url，uptoken_func三个参数中必须有一个被设置,uptoken是上传凭证，由其他程序生成;uptoken_url是提供了获取上传凭证的地址，如果需要定制获取uptoken的过程则可以设置uptoken_func;其优先级为uptoken
+	// > uptoken_url > uptoken_func
+	uptoken_func : function(file) { // 将key传给服务端获取的七牛token，上传后覆盖同名文件，即为更新操作
+		var val = $("#productImg").val();// val用于保存上传文件的url
+		// 如果val不为空，使用原key，否则创建新key
+		if (val) {
+			// 获取七牛存储的url中的key，比如“imgName.jpg”
+			key = val.split('/')[val.split('/').length - 1];
+		} else {
+			timestamp = (new Date()).valueOf();
+			// 以时间戳重命名图片，方便同名文件覆盖。
+			// 为了防止文件重名，在引入登录功能后还需加上userId这样的前缀
+			key = timestamp + '.' + file.type.split('/')[1]; // file.type的格式举例：“Image/jpg”
+		}
+		getToken(key);
+		return token;
+	},
+	filters : {
+		prevent_duplicates : false,// true:防止重复，过滤相同的文件
+		mime_types : [ {
+			title : "Image files",
+			extensions : "png,jpg,gif"
+		} // 文件类型过滤，这里限制为文件类型
+		]
+	},
+	init : {
+		'FilesAdded' : function(up, files) { // 文件添加进队列后，处理相关的事情
+			plupload.each(files, function(file) {
+				$("#imgName").textbox('setValue', file.name); // easyUI的textbox设置值
+			});
+		},
+		'BeforeUpload' : function(up, file) { // 每个文件上传前，处理相关的事情
+		},
+		'UploadProgress' : function(up, file) { // 每个文件上传时，处理相关的事情
+			console.log("上传中");
+			$("#bar").css("width", file.percent + '%');
+			$("#bar").html(file.percent + '%');
+		},
+		'FileUploaded' : function(up, file, info) { // 每个文件上传成功后，处理相关的事情
+			var domain = up.getOption('domain');
+			var data = JSON.parse(info.response);
+			$("#productImg").val(domain + data.key);
+			saveData();
+		},
+		'Error' : function(up, err, errTip) {
+			console.log("上传出错")
+		},
+		'UploadComplete' : function() {
+			// 队列文件处理完毕后，处理相关的事情
+		},
+		'Key' : function(up, file) {
+			// 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+			// 比如设置了同名文件覆盖上传，那么生成的覆盖上传token的key，必须和上传的key一致
+			return key;
+		}
+	}
+});
+
+// 获取token
+function getToken(key) {
+	$.ajax({
+		url : '/Mall/token/get',
+		type : 'post',
+		async : false,
+		data : {
+			"key" : key
+		},
+		success : function(data) {
+			var obj = JSON.parse(data);
+			token = obj.token;
+		}
+	});
+}

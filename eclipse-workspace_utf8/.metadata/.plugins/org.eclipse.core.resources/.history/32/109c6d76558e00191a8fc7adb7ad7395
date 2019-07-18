@@ -1,0 +1,86 @@
+package userCartCart.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.pojo.UserCart;
+
+public class UserCartDAOImpl implements UserCartDAO {
+
+	private Connection conn = null;
+	private PreparedStatement pst = null;
+
+	// 定义构造方法，实例化的时候完成连接的注入
+	public UserCartDAOImpl(Connection conn) {
+		super();
+		this.conn = conn;
+	}
+
+
+	// 插入记录
+	public boolean insert(UserCart userCart) throws SQLException {
+		try {
+			String sql = "insert into userCart(userCartname,name,password,sex,age,phone,address,userCartimg) values(?,?,?,?,?,?,?,?) ";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, userCart.getUserCartName());
+			pst.setString(2, userCart.getName());
+			pst.setString(3, userCart.getPassword());
+			pst.setString(4, userCart.getSex());
+			pst.setInt(5, userCart.getAge());
+			pst.setString(6, userCart.getPhone());
+			pst.setString(7, userCart.getAddress());
+			pst.setString(8, userCart.getUserCartImg());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// 更新记录
+	public boolean update(UserCart userCart) throws SQLException {
+		try {
+			String sql = "update userCart set userCartname=?,name=?,password=?,sex=?,age=?,phone=?,address=?,userCartimg=? where userCartname=?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, userCart.getUserCartName());
+			pst.setString(2, userCart.getName());
+			pst.setString(3, userCart.getPassword());
+			pst.setString(4, userCart.getSex());
+			pst.setInt(5, userCart.getAge());
+			pst.setString(5, userCart.getPhone());
+			pst.setString(6, userCart.getAddress());
+			pst.setString(6, userCart.getUserCartImg());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// 删除记录
+	public boolean delete(UserCart userCart) throws SQLException {
+		try {
+			String sql = "delete from userCart where userCartname=?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, userCart.getUserCartName());
+			pst.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public UserCart findOrderInfoByUserCart(UserCart userCart) throws SQLException {
+		String sql = "select * from userCart where username=?";
+		pst = conn.prepareStatement(sql);
+		pst.setString(1, userCart.getUserName());
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		userCart.setProductId(rs.getInt("productid"));
+		userCart.setProductCounts(rs.getInt("productcounts"));
+		return userCart;
+	}
+}

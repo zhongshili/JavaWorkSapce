@@ -1,0 +1,56 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div id="dialog_commodity" class="easyui-dialog" data-options="title:'编辑引导页数据',buttons:'#btn_commodity',closed:true" style="width:430px;height:330px;padding:20px 30px;">
+	<div>
+		<input name="productId" id="productId">
+	</div>  
+	<div>
+    <label>价格：</label>
+      <input name="productPrice" id="productPrice" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>商品标题：</label>
+    <input name="productTitle" id="productTitle" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>运费：</label>
+    <input name="productCarriage" id="productCarriage" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>发货地址：</label>
+    <input name="productAddressRigger" id="productAddressRigger" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>送积分：</label>
+    <input name="productSendCredit" id="productSendCredit" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>店铺名：</label>
+    <input name="productShopName" id="productShopName" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>店铺地址：</label>
+    <input name="productShopUrl" id="productShopUrl" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>库存：</label>
+    <input name="inventory" id="inventory" class="easyui-textbox" style="width:220px;">
+    </div><br/>
+    <div>
+    <label>产品类型ID：</label>
+    <input name="productTypeId" id="productTypeId" type="hidden">
+    </div><br/>
+    <div id="container">
+    <label>背景图片：</label>
+    <!-- 显示文件名的文本框 -->
+    <input id="productImg" class="easyui-textbox" style="width:220px;" readonly="readonly">
+    <!-- 处理图片的url -->
+    <input name="productImg" id="productImg" type="hidden">
+    <button type="button" id="pickfiles" style="font-size:12px;display: inline">选择文件</button>
+    </div>
+  </div>
+</div>
+<!-- 对话框按钮 -->
+<div id="btn_commodity">
+  <a id="a_save" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveRecord()">保存</a>
+  <a class="easyui-linkbutton" data-options="iconCls:'icon-no'" onclick="javascript:$('#dialog_commodity').dialog('close')">退出</a>
+</div>
